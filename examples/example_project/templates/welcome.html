@@ -1,0 +1,21 @@
+<p>
+    <strong>name:</strong> {{name}} <br />
+    <strong>email:</strong> {{email}} <br />
+</p>
+
+<fb:name uid="{{ id }}" firstnameonly="true" useyou="false" />
+
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({appId: '119222174797262', status: true, cookie: true,
+             xfbml: true});
+  };
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +
+      '//connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-root').appendChild(e);
+  }());
+</script>
+
