@@ -23,7 +23,6 @@ class FBPYMiddleware(object):
     def process_request(self, request):
         facebook = getattr('request', 'facebook', None)
         if not facebook:
-            print 'facebook yok'
             request.facebook = FBPY()
             request.facebook.set_config(settings.FACEBOOK_CONFIG)
             if request.session.has_key("token_string"):

@@ -84,7 +84,7 @@ MIDDLEWARE_CLASSES = (
     'fbpy.middleware.FBPYMiddleware',
 )
 
-ROOT_URLCONF = 'trailer.urls'
+ROOT_URLCONF = 'example_project.urls'
 
 TEMPLATE_DIRS = (
     "%s/templates" % BASE_PATH,
@@ -98,7 +98,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
-    'fbpy',
 )
 
 FACEBOOK_CONFIG = {
