@@ -25,25 +25,20 @@ installation
 usage in Django
 =================
 
-1) create a new application in your project as "fbconnect".
+1) add these lines to your settings.py  
 
-2) add these lines to your settings.py  
+    FACEBOOK_CONFIG = {
+        "redirect_uri"     : "%s/fbconnect" % BASE_URL,
+        "scope"            : 'email,publish_stream,offline_access,user_hometown,user_location',
+        "api_key"          : "[INSERT_API_KEY_HERE]",
+        "app_secret"       : "[INSERT_APPLICATION_SECRET_HERE]",
+        "app_id"           : "[INSERT_APPLICATION_ID_HERE]",
+    }
 
-	FACEBOOK_CONFIG = {
-	"login_next_url"   : "%s/fbconnect/" % BASE_URL, 
-	"login_cancel_url" : "%s/fbconnect/" % BASE_URL, 
-	"login_req_perms"  : 'email,publish_stream,offline_access,read_friendlists,email,user_hometown,user_location',
-	"logout_next_url"  : BASE_URL, 
-	"api_key"          : "your_application_key"
-	}
-
-3) add to your MIDDLEWARE_CLASSES:
+2) add to your MIDDLEWARE_CLASSES:
 
     fbpy.tools.FBPYMiddleware
 
-4) add to your INSTALLED_APPS variable:
-
-    'fbconnect',
     
 5) after these steps, you can call FBPY instance as request.facebook. a simple view example: 
 
