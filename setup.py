@@ -9,6 +9,7 @@ setup(name='fbpy',
     author_email='mail@emreyilmaz.me',
     url='http://github.com/egnity/fb.py',
     package_dir={'': 'src'},
-    packages = ["fbpy", "fbpy/tools",]
+    packages = ["fbpy"]
 )
+
 

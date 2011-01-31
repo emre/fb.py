@@ -12,7 +12,7 @@ you can find official documentation at facebook:
 
 for the installation tips and usage examples, take a look to the readme.
 
-Copyright (c) 2010 emre yilmaz - egnity 
+Copyright (c) 2010 emre yilmaz 
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -99,6 +99,13 @@ class GraphApi(object):
     
     def __init__(self, token):
         self.auth_token = token
+
+    @property
+    def auth_status(self):
+        if not self.auth_token:
+            return False
+        
+        return True
     
     """
     gets the given object from facebook api.
@@ -124,9 +131,12 @@ class GraphApi(object):
         makes a HTTP (GET) request to the facebook graph api servers for given parameters. 
         (just for the information getter methods.)
         """
-        parameters = {
-            "access_token" : self.auth_token,
-        }
+        parameters = {}
+        
+        if self.auth_status:
+            parameters.update({
+                "access_token" : self.auth_token,
+            })
         
         if extra_params:
             parameters.update(extra_params)
@@ -201,19 +211,19 @@ class FBPY(object):
     """
     config dict for usual operations
     """
-    CONFIG = {
-        "login_next_url"   : None,
-        "login_cancel_url" : None,
-        "login_req_perms"  : None,
-        "logout_next_url"  : None,
+    CONFIG = { 
+        "scope"            : None,
+        "redirect_uri"     : None,
         "api_key"          : None,
+        "app_id"           : None,
+        "app_secret"       : None,
     }
     
     def __init__(self, token = None):
         self.auth_token = token
         self.graph_api_instance = None
         self.rest_api_instance  = None
-	self.user_id		= 0
+        self.user_id            = 0
 
     def set_config(self, config):
         """
@@ -240,9 +250,15 @@ class FBPY(object):
         self.user_id = uid
 
     def get_uid(self):
-	return self.user_id
+        """
+        return facebook id.
+        """
+        return self.user_id
     
     def is_authenticated(self):
+        """
+        returns authenticate status.
+        """
         return bool(self.auth_token)
         
     def graph(self):
@@ -273,23 +289,27 @@ class FBPY(object):
             - next (if exists in FBPY.CONFIG, not required)
             - req_perms (if exists in FBPY.CONFIG, not required)
         """
+        """
         query_string = {
             "return_session"  : 1,
             "session_version" : 3,
             "v"               : '1.0'
         }
+        """
+        query_string = {}
+        
         
         # load default config
         query_string.update({
-            "api_key"    : FBPY.CONFIG.get("api_key"),
-            "cancel_url" : FBPY.CONFIG.get("login_cancel_url"),
-            "next"       : FBPY.CONFIG.get("login_next_url"),
-            "req_perms"  : FBPY.CONFIG.get("login_req_perms"),
+            "client_id"    : FBPY.CONFIG.get("app_id"),
+            # "api_key"    : FBPY.CONFIG.get("api_key"),
+            "redirect_uri" : FBPY.CONFIG.get("redirect_uri"),
+            "scope"        : FBPY.CONFIG.get("scope"),
         })
         
         query_string.update(params)
-        return "https://www.facebook.com/login.php?%s" % urllib.urlencode(query_string)
-
+        # return "https://www.facebook.com/login.php?%s" % urllib.urlencode(query_string)
+        return "https://www.facebook.com/dialog/oauth?%s" % urllib.urlencode(query_string)
     @staticmethod
     def get_logout_url(params):
         """
@@ -301,7 +321,7 @@ class FBPY(object):
         """
         default_params = {
             "api_key": FBPY.CONFIG.get("api_key"),
-            "next": FBPY.CONFIG.get("logout_next_url"),
+            "next"   : FBPY.CONFIG.get("logout_next_url"),
         }
         
         if not params.has_key("session_key"):
@@ -310,5 +330,6 @@ class FBPY(object):
         default_params.update(params)
         return "https://www.facebook.com/logout.php?%s" % urllib.urlencode(default_params)
 
-    
+        
+
 
