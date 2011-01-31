@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='fbpy',
-    version='1.0',
+    version='0.2',
     description='python sdk for facebook apis',
     author='Emre Yilmaz',
     author_email='mail@emreyilmaz.me',
