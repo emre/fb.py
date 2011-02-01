@@ -37,7 +37,7 @@ class FBPYMiddleware(object):
                 # cache in session
                 request.session["token_string"] = token_string
             except Exception, error:
-				print error
+               pass
 
     def process_response(self, request, response):
         response['P3P'] = 'CP="NOI DSP COR NID ADMa OPTa OUR NOR"'
