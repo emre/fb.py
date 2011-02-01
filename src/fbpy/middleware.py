@@ -32,10 +32,10 @@ class FBPYMiddleware(object):
         """
         if request.GET.has_key("code"):
             try:
-                token_string =  get_token_from_facebook(request.GET.get("code")).split("=")[1]
-                request.facebook.set_token(token_string)
-                # cache in session
-                request.session["token_string"] = token_string
+               token_string =  get_token_from_facebook(request.GET.get("code")).split("=")[1]
+               request.facebook.set_token(token_string)
+               # cache in session
+               request.session["token_string"] = token_string
             except Exception, error:
                pass
 
