@@ -37,7 +37,7 @@ usage in Django
 
 2) add to your MIDDLEWARE_CLASSES:
 
-    fbpy.tools.FBPYMiddleware
+    fbpy.middleware.FBPYMiddleware
 
     
 5) after these steps, you can call FBPY instance as request.facebook. a simple view example: 
