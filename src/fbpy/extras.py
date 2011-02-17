@@ -7,7 +7,7 @@ def require_facebook_login(function):
     login_required decorator for views.
     """
     def wrap(request, *args, **kwargs):
-        if request.facebook.is_authenticated() == False:
+        if not request.facebook.is_authenticated():
             return HttpResponseRedirect(request.facebook.get_login_url())
         return function(request, *args, **kwargs)
     return wrap
