@@ -28,9 +28,8 @@ class FBPYMiddleware(object):
             request.facebook.set_config(settings.FACEBOOK_CONFIG)
             if request.session.has_key("token_string"):
                 request.facebook.set_token(request.session.get("token_string"))
-        """
-        if facebook returned back the user session, register it.
-        """
+
+        # if facebook returned back the user session, register it. 
         if request.GET.has_key("code"):
             try:
                token_string =  get_token_from_facebook(request.GET.get("code")).split("=")[1]
@@ -41,6 +40,9 @@ class FBPYMiddleware(object):
                pass
 
     def process_response(self, request, response):
+        """
+        internet explorer fix for iframe typed facebook applications.
+        """
         response['P3P'] = 'CP="NOI DSP COR NID ADMa OPTa OUR NOR"'
         return response 
         

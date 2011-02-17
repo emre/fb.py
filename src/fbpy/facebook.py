@@ -290,7 +290,6 @@ class FBPY(object):
         # load default config
         query_string.update({
             "client_id"    : FBPY.CONFIG.get("app_id"),
-            # "api_key"    : FBPY.CONFIG.get("api_key"),
             "redirect_uri" : FBPY.CONFIG.get("redirect_uri"),
             "scope"        : FBPY.CONFIG.get("scope"),
         })
