@@ -1,8 +1,9 @@
 # -*- coding: utf8 -*-
 
-import simplejson, urllib
+import urllib
 
 from fbpy import FBPY
+
 from django.conf import settings
 
 def get_token_from_facebook(code):

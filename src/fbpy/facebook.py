@@ -58,11 +58,11 @@ class RestApi(object):
 
     def __init__(self, token):
         self.auth_token = token
-        
-    """
-    handles api-response errors
-    """
+
     def _handle_errors(self, api_response):
+        """
+        handles api-response errors
+        """
         if isinstance(api_response, dict) and api_response.has_key("error_code"):
             raise RestApiException(api_response["error_code"], api_response["error_msg"])
         
@@ -106,23 +106,24 @@ class GraphApi(object):
             return False
         
         return True
-    
-    """
-    gets the given object from facebook api.
-    """
+
     def get_object(self, request_path, extra_params = None):
+        """
+        gets the given object from facebook api.
+        """
         return self._get_request(request_path, extra_params)
         
-    """
-    puts the given object to the facebook api_key.
-    """
+
     def put_object(self, request_path, post_data):
+        """
+        puts the given object to the facebook api_key.
+        """
         return self._put_request(request_path, post_data)
         
-    """
-    handles api-response errors
-    """
     def _handle_errors(self, api_response):
+        ""
+        handles api-response errors
+        ""
         if isinstance(api_response, dict) and api_response.has_key("error"):
             raise GraphApiException(api_response["error"]["type"], api_response["error"]["message"])
     
@@ -204,13 +205,8 @@ class GraphApi(object):
         return self._put_request("%s/feed" % user_alias, post_data)
 
 class FBPY(object):
-    """
-    base FBPY object
-    """
 
-    """
-    config dict for usual operations
-    """
+    # config dict for usual operations
     CONFIG = { 
         "scope"            : None,
         "redirect_uri"     : None,
@@ -289,15 +285,7 @@ class FBPY(object):
             - next (if exists in FBPY.CONFIG, not required)
             - req_perms (if exists in FBPY.CONFIG, not required)
         """
-        """
-        query_string = {
-            "return_session"  : 1,
-            "session_version" : 3,
-            "v"               : '1.0'
-        }
-        """
         query_string = {}
-        
         
         # load default config
         query_string.update({
@@ -310,6 +298,7 @@ class FBPY(object):
         query_string.update(params)
         # return "https://www.facebook.com/login.php?%s" % urllib.urlencode(query_string)
         return "https://www.facebook.com/dialog/oauth?%s" % urllib.urlencode(query_string)
+
     @staticmethod
     def get_logout_url(params):
         """
