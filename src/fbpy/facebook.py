@@ -34,6 +34,8 @@ Copyright (c) 2010 emre yilmaz
 
 """
 
+
+
 class GraphApiException(Exception):
     """
     custom exception class for graph api response errors.
@@ -121,9 +123,9 @@ class GraphApi(object):
         return self._put_request(request_path, post_data)
         
     def _handle_errors(self, api_response):
-        ""
+        """
         handles api-response errors
-        ""
+        """
         if isinstance(api_response, dict) and api_response.has_key("error"):
             raise GraphApiException(api_response["error"]["type"], api_response["error"]["message"])
     
