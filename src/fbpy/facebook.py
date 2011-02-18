@@ -202,7 +202,7 @@ class GraphApi(object):
                     "name"   : "github logo",
                     "description": "buraya bakarlar description alani"
                 }
-        * if you want to post to your running user's wall, just send user_alias parameter as "me".
+        if you want to post to your running user's wall, just send user_alias parameter as "me".
         """
         return self._put_request("%s/feed" % user_alias, post_data)
 
