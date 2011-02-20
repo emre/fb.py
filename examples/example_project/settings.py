@@ -103,9 +103,9 @@ INSTALLED_APPS = (
 FACEBOOK_CONFIG = {
     "redirect_uri"     : "%s/fbconnect" % BASE_URL,
     "scope"            : 'email,publish_stream,offline_access,user_hometown,user_location',
-    "api_key"          : "5c346c5856715abe1ced65dcc31b96ff",
-    "app_secret"       : "7eb8635027d33f8f23143e4b829df797",
-    "app_id"           : "124078527634364",
+    "api_key"          : "[fb_app_api_key]",
+    "app_secret"       : "[fb_app_secret]",
+    "app_id"           : "[fb_app_id]",
 }
 
 
