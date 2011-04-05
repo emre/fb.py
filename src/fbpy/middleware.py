@@ -3,6 +3,7 @@
 import urllib
 
 from fbpy import FBPY
+from string import split
 
 from django.conf import settings
 
@@ -27,7 +28,8 @@ class FBPYMiddleware(object):
             request.facebook = FBPY()
             request.facebook.set_config(settings.FACEBOOK_CONFIG)
             if request.session.has_key("token_string"):
-                request.facebook.set_token(request.session.get("token_string"))
+                token_string = split(request.session.get("token_string"), '&')[0]
+                request.facebook.set_token(token_string)
 
         # if facebook returned back the user session, register it. 
         if request.GET.has_key("code"):
