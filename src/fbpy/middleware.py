@@ -32,7 +32,6 @@ class FBPYMiddleware(object):
         # if facebook returned back the user session, register it. 
         if request.GET.has_key("code"):
             try:
-                print request.GET["code"]
                 auth_response = get_token_from_facebook(request.GET.get("code"))
                 token_string  = re.search('access_token=(.*?)&', auth_response).group(1)
                 
