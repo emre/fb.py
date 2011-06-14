@@ -297,8 +297,13 @@ class FBPY(object):
         })
         
         query_string.update(params)
-        # return "https://www.facebook.com/login.php?%s" % urllib.urlencode(query_string)
+
         return "https://www.facebook.com/dialog/oauth?%s" % urllib.urlencode(query_string)
+
+    @staticmethod
+    def get_redirect_html(params = {}):
+        redirect_url = FBPY.get_login_url(params)
+        return "<script type='text/javascript' charset='utf-8'>top.location.href = '%s';</script>" % redirect_url
 
     @staticmethod
     def get_logout_url(params):
@@ -321,5 +326,6 @@ class FBPY(object):
         return "https://www.facebook.com/logout.php?%s" % urllib.urlencode(default_params)
 
         
+
 
 
