@@ -1,10 +1,8 @@
 # -*- coding: utf8 -*-
 
-import urllib
+import urllib, re
 
 from fbpy import FBPY
-from string import split
-
 from django.conf import settings
 
 def get_token_from_facebook(code):
@@ -34,12 +32,17 @@ class FBPYMiddleware(object):
         # if facebook returned back the user session, register it. 
         if request.GET.has_key("code"):
             try:
-               token_string =  get_token_from_facebook(request.GET.get("code")).split("=")[1]
-               request.facebook.set_token(token_string)
-               # cache in session
-               request.session["token_string"] = token_string
+                print request.GET["code"]
+                auth_response = get_token_from_facebook(request.GET.get("code"))
+                token_string  = re.search('access_token=(.*?)&', auth_response).group(1)
+                
+                request.facebook.set_token(token_string)
+                # cache in session
+                request.session["token_string"] = token_string
             except Exception, error:
-               pass
+                import traceback
+                print traceback.print_exc()
+                print error
 
     def process_response(self, request, response):
         """
@@ -48,4 +51,5 @@ class FBPYMiddleware(object):
         response['P3P'] = 'CP="NOI DSP COR NID ADMa OPTa OUR NOR"'
         return response 
         
+
 
