@@ -1,8 +1,10 @@
 # -*- coding: utf8 -*-
 
-import urllib, re
+import urllib, re, sys
 
 from fbpy import FBPY
+from string import split
+
 from django.conf import settings
 
 def get_token_from_facebook(code):
@@ -16,6 +18,7 @@ def get_token_from_facebook(code):
         "code"          : code,
     }
     content = urllib.urlopen("https://graph.facebook.com/oauth/access_token?%s" % urllib.urlencode(query_string)).read()
+
     return content
 
 class FBPYMiddleware(object):
@@ -33,16 +36,13 @@ class FBPYMiddleware(object):
         if request.GET.has_key("code"):
             try:
                 auth_response = get_token_from_facebook(request.GET.get("code"))
-                token_string  = re.search('access_token=(.*?)&', auth_response).group(1)
-                
+                token_string  = re.search('access_token=([^&]*)', auth_response).group(1)
                 request.facebook.set_token(token_string)
                 # cache in session
                 request.session["token_string"] = token_string
             except Exception, error:
-                import traceback
-                print traceback.print_exc()
-                print error
-
+                pass
+            
     def process_response(self, request, response):
         """
         internet explorer fix for iframe typed facebook applications.
@@ -50,5 +50,4 @@ class FBPYMiddleware(object):
         response['P3P'] = 'CP="NOI DSP COR NID ADMa OPTa OUR NOR"'
         return response 
         
-
 
