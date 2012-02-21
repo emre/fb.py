@@ -1,10 +1,10 @@
-THIS PROJECT IS NOT MAINTAINED ANYMORE.
+THIS PROJECT IS NOT MAINTAINED ANYMORE. 
+<trollcode>DEVELOPMENT WILL BE CONTINUE IF ONLY TIMU EREN MAKE A DONATION!!!11</trollcode>
 =================
-thanks for all the feedback in the past.
+for donation:
 
 <a href='http://www.pledgie.com/campaigns/16824'><img alt='Click here to lend your support to: donate for updated and new fb.py version and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/16824.png?skin_name=chrome' border='0' /></a>
 
-README
 
 fb.py 
 =================
