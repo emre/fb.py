@@ -2,6 +2,8 @@ THIS PROJECT IS NOT MAINTAINED ANYMORE.
 =================
 thanks for all the feedback in the past.
 
+<a href='http://www.pledgie.com/campaigns/16824'><img alt='Click here to lend your support to: donate for updated and new fb.py version and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/16824.png?skin_name=chrome' border='0' /></a>
+
 README
 
 fb.py 
