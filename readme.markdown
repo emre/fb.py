@@ -84,9 +84,7 @@ to-do
 thanks
 =================
 
-1) Rabia Sozkesen - for the fantastic name of the library.
-
-2) Timu Eren & Yilmaz Ugurlu - suggestions and ideas.
+1) Timu Eren & Yilmaz Ugurlu - suggestions and ideas.
 
 
 for donations:
